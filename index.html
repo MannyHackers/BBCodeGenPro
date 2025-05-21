@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -22,1644 +23,1192 @@
                             700: '#0369a1',
                             800: '#075985',
                             900: '#0c4a6e',
-                        },
-                        secondary: {
-                            50: '#fdf2f8',
-                            100: '#fce7f3',
-                            200: '#fbcfe8',
-                            300: '#f9a8d4',
-                            400: '#f472b6',
-                            500: '#ec4899',
-                            600: '#db2777',
-                            700: '#be185d',
-                            800: '#9d174d',
-                            900: '#831843',
-                        },
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    boxShadow: {
-                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-                        'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
-                    },
-                },
-            },
+                        }
+                    }
+                }
+            }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
-        
-        :root {
-            --bg-light: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
-            --bg-dark: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-            --card-bg-light: rgba(255, 255, 255, 0.85);
-            --card-bg-dark: rgba(26, 32, 44, 0.85);
-            --text-light: #1a202c;
-            --text-dark: #f7fafc;
-            --border-light: rgba(255, 255, 255, 0.18);
-            --border-dark: rgba(26, 32, 44, 0.18);
-            --shadow-light: rgba(31, 38, 135, 0.15);
-            --shadow-dark: rgba(0, 0, 0, 0.3);
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            transition: background 0.3s ease;
-        }
-        
-        body.light-mode {
-            background: var(--bg-light);
-            color: var(--text-light);
-        }
-        
-        body.dark-mode {
-            background: var(--bg-dark);
-            color: var(--text-dark);
-        }
-        
-        .glass-effect {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        
-        .light-mode .glass-effect {
-            background: var(--card-bg-light);
-            border: 1px solid var(--border-light);
-            box-shadow: 0 8px 32px 0 var(--shadow-light);
-        }
-        
-        .dark-mode .glass-effect {
-            background: var(--card-bg-dark);
-            border: 1px solid var(--border-dark);
-            box-shadow: 0 8px 32px 0 var(--shadow-dark);
-        }
-        
-        .preview-container {
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            overflow-x: auto;
-        }
-        
-        .light-mode .preview-container {
-            background: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-        
-        .dark-mode .preview-container {
-            background: #2d3748;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .separator {
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        
-        .light-mode .separator {
-            color: #555;
-        }
-        
-        .dark-mode .separator {
-            color: #cbd5e0;
-        }
-        
-        .image-preview {
-            margin: 15px 0;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-        
-        .light-mode .image-preview {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        
-        .dark-mode .image-preview {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        .image-preview:hover {
-            transform: scale(1.02);
+        .fade-in {
+            animation: fadeIn 1s ease-out;
         }
         
         .code-block {
-            border-radius: 8px;
-            padding: 16px;
-            font-family: 'JetBrains Mono', monospace;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
             white-space: pre-wrap;
-            word-wrap: break-word;
-            margin: 15px 0;
-            transition: all 0.3s ease;
+            word-break: break-all;
+            border-radius: 0.375rem;
+            border: 1px solid #475569;
         }
         
-        .light-mode .code-block {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
-            color: #1a202c;
+        .dark .code-block {
+            background-color: #0f172a;
+            border-color: #334155;
         }
         
-        .dark-mode .code-block {
-            background-color: #1a202c;
-            border: 1px solid #4a5568;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-            color: #e2e8f0;
+        .light-mode-code {
+            background-color: #f1f5f9;
+            color: #334155;
+            border-color: #cbd5e1;
         }
         
-        .rainbow-title {
-            background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: bold;
-            font-size: 1.8rem;
-            text-align: center;
-            padding: 10px;
+        .tab-content {
+            display: none;
         }
         
-        .input-group {
-            position: relative;
-            margin-bottom: 1.5rem;
+        .tab-content.active {
+            display: block;
         }
         
-        .input-group label {
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            padding: 0 8px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .light-mode .input-group label {
-            background: white;
-            color: #6b7280;
-        }
-        
-        .dark-mode .input-group label {
-            background: #2d3748;
-            color: #e2e8f0;
-        }
-        
-        .input-group input, .input-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-        
-        .light-mode .input-group input, .light-mode .input-group textarea {
-            border: 1px solid #e5e7eb;
-            background: white;
-            color: #1a202c;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
-        
-        .dark-mode .input-group input, .dark-mode .input-group textarea {
-            border: 1px solid #4a5568;
-            background: #2d3748;
-            color: #f7fafc;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        
-        .light-mode .input-group input:focus, .light-mode .input-group textarea:focus {
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: #d1d5db;
             outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
         
-        .dark-mode .input-group input:focus, .dark-mode .input-group textarea:focus {
-            outline: none;
-            border-color: #4299e1;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        .dark .slider {
+            background: #4b5563;
         }
         
-        .btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        /* Lighter button colors for light mode */
-        .light-mode .btn-primary {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        }
-        
-        .light-mode .btn-primary:hover {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
-        }
-        
-        .light-mode .btn-secondary {
-            background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
-        }
-        
-        .light-mode .btn-secondary:hover {
-            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(236, 72, 153, 0.25);
-        }
-        
-        .light-mode .btn-danger {
-            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
-        }
-        
-        .light-mode .btn-danger:hover {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
-        }
-        
-        .light-mode .btn-success {
-            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-        }
-        
-        .light-mode .btn-success:hover {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25);
-        }
-        
-        /* Dark mode buttons */
-        .dark-mode .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-        }
-        
-        .dark-mode .btn-primary:hover {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
-        }
-        
-        .dark-mode .btn-secondary {
-            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.2);
-        }
-        
-        .dark-mode .btn-secondary:hover {
-            background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(219, 39, 119, 0.25);
-        }
-        
-        .dark-mode .btn-danger {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
-        }
-        
-        .dark-mode .btn-danger:hover {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.25);
-        }
-        
-        .dark-mode .btn-success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
-        }
-        
-        .dark-mode .btn-success:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.25);
-        }
-        
-        .card {
-            border-radius: 16px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .light-mode .card {
-            background: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .dark-mode .card {
-            background: #2d3748;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .light-mode .card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-        
-        .dark-mode .card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .card-header {
-            padding: 20px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-        }
-        
-        .light-mode .card-header {
-            border-bottom: 1px solid #f3f4f6;
-            background-image: linear-gradient(to right, #f0f9ff, #e0f7fa);
-        }
-        
-        .dark-mode .card-header {
-            border-bottom: 1px solid #4a5568;
-            background-image: linear-gradient(to right, #1a365d, #2c5282);
-        }
-        
-        /* Fix card header text in light mode */
-        .light-mode .card-header h2 {
-            color: #1a202c;
-        }
-        
-        .dark-mode .card-header h2 {
-            color: #f7fafc;
-        }
-        
-        .card-body {
-            padding: 24px;
-        }
-        
-        .image-input {
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-            transition: all 0.2s ease;
-        }
-        
-        .light-mode .image-input {
-            background: #f9fafb;
-            border: 1px solid #f3f4f6;
-        }
-        
-        .dark-mode .image-input {
-            background: #2d3748;
-            border: 1px solid #4a5568;
-        }
-        
-        .light-mode .image-input:hover {
-            background: #f3f4f6;
-        }
-        
-        .dark-mode .image-input:hover {
-            background: #374151;
-        }
-        
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .tooltip .tooltip-text {
-            visibility: hidden;
-            width: 200px;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1;
-            right: 100%; /* Position to the left */
-            top: 50%;
-            transform: translateY(-50%);
-            margin-right: 10px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
-        }
-        
-        .light-mode .tooltip .tooltip-text {
-            background-color: #333;
-            color: #fff;
-        }
-        
-        .dark-mode .tooltip .tooltip-text {
-            background-color: #e2e8f0;
-            color: #1a202c;
-        }
-        
-        .tooltip .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 100%;
-            margin-top: -5px;
-            border-width: 5px;
-            border-style: solid;
-        }
-        
-        .light-mode .tooltip .tooltip-text::after {
-            border-color: transparent transparent transparent #333;
-        }
-        
-        .dark-mode .tooltip .tooltip-text::after {
-            border-color: transparent transparent transparent #e2e8f0;
-        }
-        
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .section-divider {
-            display: flex;
-            align-items: center;
-            margin: 30px 0;
-        }
-        
-        .section-divider::before, .section-divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-        }
-        
-        .light-mode .section-divider::before, .light-mode .section-divider::after {
-            background: #e5e7eb;
-        }
-        
-        .dark-mode .section-divider::before, .dark-mode .section-divider::after {
-            background: #4a5568;
-        }
-        
-        .section-divider span {
-            padding: 0 16px;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        .light-mode .section-divider span {
-            color: #6b7280;
-        }
-        
-        .dark-mode .section-divider span {
-            color: #e2e8f0;
-        }
-        
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: .7;
-            }
-        }
-        
-        .tab-container {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .light-mode .tab-container {
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .dark-mode .tab-container {
-            border-bottom: 1px solid #4a5568;
-        }
-        
-        .tab {
-            padding: 12px 16px;
-            font-weight: 500;
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0ea5e9;
             cursor: pointer;
-            transition: all 0.2s ease;
-            border-bottom: 2px solid transparent;
-            text-align: center;
-            flex: 1;
         }
         
-        /* Fix tab colors in light mode */
-        .light-mode .tab {
-            color: #4b5563;
+        .slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0ea5e9;
+            cursor: pointer;
         }
         
-        .dark-mode .tab {
-            color: #e2e8f0;
-        }
-        
-        .light-mode .tab.active {
-            color: #3b82f6;
-            border-bottom: 2px solid #3b82f6;
-        }
-        
-        .dark-mode .tab.active {
-            color: #4299e1;
-            border-bottom: 2px solid #4299e1;
-        }
-        
-        .light-mode .tab:hover:not(.active) {
-            color: #1f2937;
-            background: #f9fafb;
-        }
-        
-        .dark-mode .tab:hover:not(.active) {
-            color: #f7fafc;
-            background: #374151;
-        }
-        
-        /* Toggle switch - Fixed for light mode */
-        .switch {
+        .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 50px;
+            width: 48px;
             height: 24px;
         }
         
-        .switch input {
+        .toggle-switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
         
-        .slider {
+        .toggle-slider {
             position: absolute;
             cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            background-color: #ccc;
             transition: .4s;
             border-radius: 24px;
         }
         
-        .light-mode .slider {
-            background-color: #e2e8f0;
-        }
-        
-        .dark-mode .slider {
-            background-color: #4a5568;
-        }
-        
-        .slider:before {
+        .toggle-slider:before {
             position: absolute;
             content: "";
             height: 18px;
             width: 18px;
             left: 3px;
             bottom: 3px;
+            background-color: white;
             transition: .4s;
             border-radius: 50%;
         }
         
-        .light-mode .slider:before {
-            background-color: white;
+        input:checked + .toggle-slider {
+            background-color: #0ea5e9;
         }
         
-        .dark-mode .slider:before {
-            background-color: #e2e8f0;
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
         }
         
-        .light-mode input:checked + .slider {
-            background-color: #60a5fa;
-        }
-        
-        .dark-mode input:checked + .slider {
-            background-color: #4299e1;
-        }
-        
-        .light-mode input:focus + .slider {
-            box-shadow: 0 0 1px #3b82f6;
-        }
-        
-        .dark-mode input:focus + .slider {
-            box-shadow: 0 0 1px #4299e1;
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-        
-        /* Theme toggle */
-        .theme-toggle {
-            display: flex;
-            gap: 10px;
-            padding: 10px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-        
-        .light-mode .theme-toggle {
-            background: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .dark-mode .theme-toggle {
-            background: #2d3748;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .theme-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .light-mode .theme-btn {
-            color: #4b5563;
-            background: #f3f4f6;
-        }
-        
-        .dark-mode .theme-btn {
-            color: #e2e8f0;
-            background: #1a202c;
-        }
-        
-        .theme-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .theme-btn.active {
-            color: white;
-        }
-        
-        .light-mode .theme-btn.active {
-            background: #3b82f6;
-        }
-        
-        .dark-mode .theme-btn.active {
-            background: #4299e1;
-        }
-        
-        /* Fix preview and BBCode tabs in light mode */
-        .light-mode #previewTab, .light-mode #codeTab {
-            background: transparent;
-        }
-        
-        .light-mode #previewTab .bg-white, .light-mode #codeTab .bg-white {
-            background: white;
-        }
-        
-        /* Fix preview and BBCode tab titles in light mode */
-        .light-mode #previewTab h2, .light-mode #codeTab h2 {
-            color: #1a202c;
-        }
-        
-        /* Fix BBCode output in light mode */
-        .light-mode #bbcodeOutput {
-            background: #f8fafc;
-            color: #1a202c;
-            border-color: #e2e8f0;
-        }
-        
-        /* Fix BBCode output in dark mode */
-        .dark-mode #bbcodeOutput {
-            background: #1a202c;
-            color: #e2e8f0;
-            border-color: #4a5568;
-        }
-        
-        /* Pro Version badge styling */
-        .pro-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
+        .option-description {
             font-size: 0.75rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            color: #6b7280;
+            margin-top: 0.25rem;
+            font-style: italic;
         }
         
-        .light-mode .pro-badge {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);
-        }
-        
-        .dark-mode .pro-badge {
-            background: linear-gradient(135deg, #10b981, #047857);
-            color: white;
-            box-shadow: 0 2px 5px rgba(5, 150, 105, 0.4);
-        }
-        
-        /* Typing animation for main title */
-        .typing-animation {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 0;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-            border-right: 3px solid transparent;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #3b82f6 }
-        }
-        
-        /* New gradient for main heading */
-        .main-title-gradient {
-            background: linear-gradient(90deg, #8B5CF6, #EC4899, #F43F5E, #8B5CF6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 300% 100%;
-            animation: gradient-shift 8s ease infinite;
-        }
-        
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50% }
-            50% { background-position: 100% 50% }
-            100% { background-position: 0% 50% }
-        }
-        
-        /* Fix tagline color in light mode */
-        .light-mode .tagline {
-            color: #4b5563;
-        }
-        
-        .dark-mode .tagline {
-            color: #d1d5db;
-        }
-        
-        /* Fix centering in preview section */
-        .preview-section-title {
-            width: 100%;
-            text-align: center;
-        }
-        
-        /* Mobile optimizations */
-        @media (max-width: 640px) {
-            .card-header {
-                flex-direction: row;
-                align-items: center;
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                padding: 15px;
-            }
-            
-            .card-header h2 {
-                flex: 1;
-                min-width: 200px;
-                font-size: 1rem;
-            }
-            
-            .tooltip {
-                margin-left: auto;
-            }
-            
-            /* Keep tooltips on the left side even on mobile */
-            .tooltip .tooltip-text {
-                width: 180px;
-                right: 100%;
-                left: auto;
-                top: 50%;
-                bottom: auto;
-                transform: translateY(-50%);
-                margin-right: 5px;
-                margin-bottom: 0;
-            }
-            
-            .tooltip .tooltip-text::after {
-                top: 50%;
-                left: 100%;
-                margin-top: -5px;
-                margin-left: 0;
-                border-width: 5px;
-                border-style: solid;
-            }
-            
-            .light-mode .tooltip .tooltip-text::after {
-                border-color: transparent transparent transparent #333;
-            }
-            
-            .dark-mode .tooltip .tooltip-text::after {
-                border-color: transparent transparent transparent #e2e8f0;
-            }
-            
-            .tab {
-                padding: 10px 8px;
-                font-size: 0.9rem;
-            }
-            
-            .preview-container {
-                padding: 15px;
-                max-width: 100%;
-                overflow-x: auto;
-            }
-            
-            .code-block {
-                font-size: 0.8rem;
-                padding: 12px;
-            }
-            
-            /* Mobile header layout - Pro Version left, theme toggle right */
-            .mobile-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            }
+        .dark .option-description {
+            color: #9ca3af;
         }
     </style>
 </head>
-<body class="p-4 md:p-8 light-mode">
-    <div class="max-w-6xl mx-auto">
-        <div class="glass-effect rounded-2xl p-4 md:p-8 mb-8">
-            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-3">
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-bold main-title-gradient typing-animation">BBCode Post Gen Pro</h1>
-                    <p class="text-sm md:text-base tagline mt-1">Create beautiful BBCode posts for forums and websites</p>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-200">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="flex justify-between items-center mb-8">
+            <h1 id="mainTitle" class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent fade-in">BBCode Post Gen Pro</h1>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm">Theme:</span>
+                    <select id="themeSelect" class="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 text-sm">
+                        <option value="system">System Default</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
                 </div>
-                <div class="flex items-center gap-3 mobile-header">
-                    <span class="pro-badge">
-                        <span class="w-2 h-2 mr-1 bg-white rounded-full"></span>
-                        Pro Version
-                    </span>
-                    <!-- Theme toggle moved to header -->
-                    <div class="theme-toggle">
-                        <div class="theme-btn" id="lightMode" title="Light Mode">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                        <div class="theme-btn" id="darkMode" title="Dark Mode">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                        <div class="theme-btn" id="systemMode" title="System Default">
-                            <i class="fas fa-desktop"></i>
-                        </div>
-                    </div>
-                </div>
+                <button id="proVersionBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-md hover:from-purple-700 hover:to-indigo-700 transition-colors">
+                    <i class="fas fa-crown text-yellow-300 mr-2"></i>Pro Version
+                </button>
             </div>
-            
-            <div class="tab-container">
-                <div class="tab active" data-tab="editor">
-                    <i class="fas fa-edit mr-1"></i> Editor
-                </div>
-                <div class="tab" data-tab="preview">
-                    <i class="fas fa-eye mr-1"></i> Preview
-                </div>
-                <div class="tab" data-tab="code">
-                    <i class="fas fa-code mr-1"></i> BBCode
-                </div>
-            </div>
-            
-            <div id="editorTab" class="tab-content">
-                <div class="card mb-6">
-                    <div class="card-header">
-                        <h2 class="text-lg md:text-xl font-semibold">
-                            <i class="fas fa-image text-primary-600 dark:text-primary-400 mr-2"></i> Logo
-                        </h2>
-                        <div class="tooltip">
-                            <i class="fas fa-info-circle text-gray-400 dark:text-gray-500"></i>
-                            <span class="tooltip-text">Customize your logo image</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <label for="logoUrl">Logo URL</label>
-                            <input type="text" id="logoUrl" value="https://i.ibb.co/TqnQFmM2/Silent-Rogue.png" class="focus:ring-2 focus:ring-primary-500" placeholder="Enter logo URL">
-                        </div>
-                        
-                        <div class="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-900">
-                            <div>
-                                <span class="font-medium text-gray-700 dark:text-gray-200">Use Default Logo</span>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Use the default Silent Rogue logo</p>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" id="useDefaultLogo" checked>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card mb-6">
-                    <div class="card-header">
-                        <h2 class="text-lg md:text-xl font-semibold">
-                            <i class="fas fa-heading text-primary-600 dark:text-primary-400 mr-2"></i> Title Section
-                        </h2>
-                        <div class="tooltip">
-                            <i class="fas fa-info-circle text-gray-400 dark:text-gray-500"></i>
-                            <span class="tooltip-text">Customize your gallery title</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <label for="galleryTitle">Gallery Title</label>
-                            <input type="text" id="galleryTitle" value="—–== 📸 Screenshots Gallery ==—–" class="focus:ring-2 focus:ring-primary-500" placeholder="Enter gallery title">
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                            <div class="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-900">
-                                <div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-200">Spoiler Format</span>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Use spoiler tags for code blocks</p>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" id="blutopiaFormat">
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-900">
-                                <div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-200">Center All Content</span>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Center all text and content</p>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" id="centerContent" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-900">
-                                <div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-200">Center Only Header</span>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Center only logo, title and images</p>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" id="centerHeaderOnly">
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card mb-6">
-                    <div class="card-header">
-                        <h2 class="text-lg md:text-xl font-semibold">
-                            <i class="fas fa-images text-primary-600 dark:text-primary-400 mr-2"></i> Images Section
-                        </h2>
-                        <div class="tooltip">
-                            <i class="fas fa-info-circle text-gray-400 dark:text-gray-500"></i>
-                            <span class="tooltip-text">Add image URLs to display in your gallery</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="imageInputs">
-                            <!-- Image inputs will be added here -->
-                        </div>
-                        <button id="addImage" class="btn btn-primary mt-4 w-full">
-                            <i class="fas fa-plus mr-2"></i> Add New Image
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="card mb-6">
-                    <div class="card-header">
-                        <h2 class="text-lg md:text-xl font-semibold">
-                            <i class="fas fa-code text-primary-600 dark:text-primary-400 mr-2"></i> Eac3 to Log
-                        </h2>
-                        <div class="tooltip">
-                            <i class="fas fa-info-circle text-gray-400 dark:text-gray-500"></i>
-                            <span class="tooltip-text">Add your Eac3to log content</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group mb-0">
-                            <label for="eac3toContent">Eac3to Log Content</label>
-                            <textarea id="eac3toContent" class="h-40 focus:ring-2 focus:ring-primary-500 font-mono" placeholder="Enter your Eac3 to log content here"></textarea>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card mb-6">
-                    <div class="card-header">
-                        <h2 class="text-lg md:text-xl font-semibold">
-                            <i class="fas fa-compact-disc text-primary-600 dark:text-primary-400 mr-2"></i> BDInfo
-                        </h2>
-                        <div class="tooltip">
-                            <i class="fas fa-info-circle text-gray-400 dark:text-gray-500"></i>
-                            <span class="tooltip-text">Add your BDInfo content</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group mb-0">
-                            <label for="bdInfoContent">BDInfo Content</label>
-                            <textarea id="bdInfoContent" class="h-40 focus:ring-2 focus:ring-primary-500 font-mono" placeholder="Enter your BDInfo content here"></textarea>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card mb-6">
-                    <div class="card-header">
-                        <h2 class="text-lg md:text-xl font-semibold">
-                            <i class="fas fa-link text-primary-600 dark:text-primary-400 mr-2"></i> Sources
-                        </h2>
-                        <div class="tooltip">
-                            <i class="fas fa-info-circle text-gray-400 dark:text-gray-500"></i>
-                            <span class="tooltip-text">Add your sources information</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group mb-0">
-                            <label for="sourcesContent">Sources Content</label>
-                            <textarea id="sourcesContent" class="h-24 focus:ring-2 focus:ring-primary-500" placeholder="Enter your sources information here"></textarea>
-                        </div>
-                    </div>
-                </div>
-                
-                <button id="generateBBCode" class="btn btn-success w-full text-lg py-4">
-                    <i class="fas fa-magic mr-2"></i> Generate BBCode Gallery
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-8">
+            <div class="flex border-b border-gray-200 dark:border-gray-700">
+                <button class="tab-btn px-6 py-3 font-medium text-primary-600 dark:text-primary-400 border-b-2 border-primary-500" data-tab="editor">
+                    <i class="fas fa-edit mr-2"></i>Editor
+                </button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400" data-tab="bbcode">
+                    <i class="fas fa-code mr-2"></i>BBCode
                 </button>
             </div>
             
-            <div id="previewTab" class="tab-content hidden">
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-card p-4 md:p-6">
-                    <h2 class="text-lg md:text-xl font-semibold mb-4">
-                        <i class="fas fa-eye text-primary-600 dark:text-primary-400 mr-2"></i> Live Preview
+            <div class="tab-content active p-6" id="editor-tab">
+                <!-- Global Options Section - Fixed structure -->
+                <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-cog text-primary-500 mr-2"></i>Global Options
                     </h2>
-                    <div id="previewContainer" class="preview-container">
-                        <!-- Preview content will be inserted here -->
-                        <div class="flex items-center justify-center h-40 text-gray-400 dark:text-gray-500">
-                            <div class="text-center">
-                                <i class="fas fa-image text-5xl mb-2"></i>
-                                <p>Click "Generate BBCode Gallery" to see preview</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Use Default Logo</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="useDefaultLogo" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Use the default logo instead of a custom URL</p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Use Spoiler Tags</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="useSpoilerTags">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Wrap code blocks in spoiler tags</p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Center All Content</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="centerAllContent">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Center everything including code blocks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Center Only Header</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="centerOnlyHeader" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Center only section titles, not code blocks</p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Show Extra Title</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="showExtraTitle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Add an additional title and description section</p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Show Custom Sections</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="showCustomSections">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Add your own custom sections with titles</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Show Separator Lines</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="showSeparatorLines">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Show separator lines between sections</p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Multi Heading Color Mode</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="multiColorHeading" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="option-description">Use unique colors for each section heading</p>
+                        </div>
+						
+						<div>
+							<div class="flex items-center justify-between">
+								<label class="text-sm font-medium">Center Headings & Separators</label>
+								<label class="toggle-switch">
+									<input type="checkbox" id="centerHeadingsSeparators" checked>
+									<span class="toggle-slider"></span>
+								</label>
+							</div>
+							<p class="option-description">Center section titles and divider lines</p>
+						</div>
+                    </div>
+                </div>
+                
+                <!-- Logo Section -->
+                <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-image text-primary-500 mr-2"></i>Logo Section
+                    </h2>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Logo URL</label>
+                        <input type="text" id="logoUrl" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+                            placeholder="https://i.ibb.co/TqnQFmM2/Silent-Rogue.png">
+                    </div>
+                    
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-2">Logo Width: <span id="logoWidthValue">450</span>px</label>
+                        <input type="range" id="logoWidth" class="slider w-full" min="200" max="800" value="450">
+                    </div>
+                </div>
+                
+                <!-- Extra Title & Description Section -->
+                <div id="extraTitleSection" class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hidden">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-star text-primary-500 mr-2"></i>Extra Title & Description
+                    </h2>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Extra Title</label>
+                        <input type="text" id="extraTitleText" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+                            placeholder="Enter extra title here">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Description</label>
+                        <textarea id="extraDescription" rows="4" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+                            placeholder="Enter description here..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Title Section -->
+                <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-heading text-primary-500 mr-2"></i>Screenshots Title
+                    </h2>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Title Text</label>
+                        <input type="text" id="titleText" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+                            value="Screenshots Gallery" placeholder="Screenshots Gallery">
+                    </div>
+                    
+                    <div class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md">
+                        <p class="text-center font-bold text-lg">—–== 📸 <span id="titlePreview">Screenshots Gallery</span> ==—–</p>
+                    </div>
+                </div>
+                
+                <!-- Images Section -->
+                <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-images text-primary-500 mr-2"></i>Images Section
+                    </h2>
+                    
+                    <div id="imageInputs" class="space-y-4 mb-4">
+                        <div class="image-input p-4 border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800">
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <div class="flex-1">
+                                    <label class="block text-sm font-medium mb-1">Image URL</label>
+                                    <input type="text" class="imageUrl w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800" 
+                                        placeholder="https://example.com/image.jpg">
+                                </div>
+                                <div class="flex items-end pb-1">
+                                    <button class="removeImage p-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Image Width: <span id="imageWidthValue">450</span>px</label>
+                        <input type="range" id="imageWidth" class="slider w-full" min="200" max="800" value="450">
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button id="addImage" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Add New Image
+                        </button>
+                        <button id="bulkImport" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+                            <i class="fas fa-file-import mr-2"></i>Bulk Import
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- EAC3 to Log Section -->
+                <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-file-code text-primary-500 mr-2"></i>EAC3 To Log Section
+                    </h2>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">EAC3 To Log Content</label>
+                        <textarea id="eac3Content" rows="6" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-mono" 
+                            placeholder="Paste your EAC3 To log content here..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- BDInfo Section -->
+                <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-compact-disc text-primary-500 mr-2"></i>BDInfo Section
+                    </h2>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">BDInfo Content</label>
+                        <textarea id="bdInfoContent" rows="6" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-mono" 
+                            placeholder="Paste your BDInfo content here..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Sources Section -->
+                <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-link text-primary-500 mr-2"></i>Sources Section
+                    </h2>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Sources Content</label>
+                        <textarea id="sourcesContent" rows="4" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-mono" 
+                            placeholder="List your sources here..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Custom Sections Container -->
+                <div id="customSections" class="hidden">
+                    <!-- Custom sections will be added here -->
+                    <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold flex items-center">
+                                <i class="fas fa-puzzle-piece text-primary-500 mr-2"></i>Custom Section 1
+                            </h2>
+                            <button class="removeCustomSection p-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Section Title</label>
+                            <input type="text" class="customSectionTitle w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+                                placeholder="Enter section title" value="Custom Section 1">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Section Content</label>
+                            <textarea class="customSectionContent w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+                                rows="4" placeholder="Enter your content here..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 flex justify-center">
+                        <button id="addCustomSection" class="px-6 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-colors">
+                            <i class="fas fa-plus-circle mr-2"></i>Add Custom Section
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button id="generateBtn" class="px-8 py-3 bg-primary-600 text-white font-bold rounded-md hover:bg-primary-700 transition-colors">
+                        <i class="fas fa-magic mr-2"></i>Generate BBCode
+                    </button>
                 </div>
             </div>
             
-            <div id="codeTab" class="tab-content hidden">
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-card p-4 md:p-6">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-3">
-                        <h2 class="text-lg md:text-xl font-semibold">
-                            <i class="fas fa-code text-primary-600 dark:text-primary-400 mr-2"></i> Generated BBCode
-                        </h2>
-                        <button id="copyBBCode" class="btn btn-secondary w-full md:w-auto">
-                            <i class="fas fa-copy mr-2"></i> Copy to Clipboard
-                        </button>
-                    </div>
-                    <textarea id="bbcodeOutput" class="w-full h-64 md:h-96 p-4 border rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" readonly placeholder="Click 'Generate BBCode Gallery' to generate code"></textarea>
+            <div class="tab-content p-6" id="bbcode-tab">
+                <div class="flex justify-end mb-4">
+                    <button id="copyBtn" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-copy mr-2"></i>Copy to Clipboard
+                    </button>
+                </div>
+                <div id="codeBlockContainer" class="code-block p-4 overflow-auto h-[600px]">
+                    <pre id="bbcodeOutput" class="text-sm"></pre>
                 </div>
             </div>
         </div>
         
-        <div class="text-center text-gray-500 dark:text-gray-400 text-sm">
-            <p>BBCode Post Gen Pro &copy; 2025 | Created with <i class="fas fa-heart text-red-500"></i> by <a href="https://t.me/MannyHacker" target="_blank" class="text-blue-500 hover:underline">Manny</a></p>
+        <div class="text-center text-sm text-gray-500 dark:text-gray-400">
+            <p>BBCode Post Gen Pro &copy; <span id="currentYear"></span> | Created with <i class="fas fa-heart text-red-500"></i> by <a href="https://MannyHacker.t.me" target="_blank" class="text-primary-500 hover:underline">Manny</a></p>
+        </div>
+    </div>
+    
+    <!-- Bulk Import Modal -->
+    <div id="bulkImportModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 max-w-2xl w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">Bulk Import Images</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <p class="mb-4 text-gray-600 dark:text-gray-300">Paste one image URL per line or BBCode format:</p>
+            
+            <textarea id="bulkImportText" rows="10" class="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md mb-4" 
+                placeholder="https://example.com/image1.jpg
+https://example.com/image2.jpg
+or BBCode format:
+[url=https://ibb.co/GfkntpGp][img]https://i.ibb.co/mrtbXTdT/Flower-4.png[/img][/url]"></textarea>
+            
+            <div class="flex justify-end">
+                <button id="importImages" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
+                    <i class="fas fa-file-import mr-2"></i>Import Images
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pro Version Modal -->
+    <div id="proVersionModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 max-w-4xl w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+                    <i class="fas fa-crown text-yellow-400 mr-2"></i>Pro Version Features
+                </h3>
+                <button id="closeProModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Current features available in BBCode Post Gen Pro:</p>
+                
+                <div class="space-y-4">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-gray-600 dark:text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Logo section with custom URL and width</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Screenshots title section with customizable text</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Multiple image uploads with custom width</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>EAC3 To Log section</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>BDInfo section</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Sources section</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Custom sections with titles</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Bulk image import</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>BBCode formatting options (center, spoiler)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Light/Dark/System theme options</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flex justify-center">
+                <button class="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-md hover:from-purple-700 hover:to-indigo-700 transition-colors">
+                    <i class="fas fa-crown text-yellow-300 mr-2"></i>Upgrade to Pro
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Theme management
-            const body = document.body;
-            const lightModeBtn = document.getElementById('lightMode');
-            const darkModeBtn = document.getElementById('darkMode');
-            const systemModeBtn = document.getElementById('systemMode');
-            
-            // Check for saved theme preference or use system preference
-            const savedTheme = localStorage.getItem('theme');
-            
-            function setTheme(theme) {
-                if (theme === 'dark') {
-                    body.classList.remove('light-mode');
-                    body.classList.add('dark-mode');
-                    lightModeBtn.classList.remove('active');
-                    darkModeBtn.classList.add('active');
-                    systemModeBtn.classList.remove('active');
-                    localStorage.setItem('theme', 'dark');
-                } else if (theme === 'light') {
-                    body.classList.add('light-mode');
-                    body.classList.remove('dark-mode');
-                    lightModeBtn.classList.add('active');
-                    darkModeBtn.classList.remove('active');
-                    systemModeBtn.classList.remove('active');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    // System default
-                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    if (prefersDark) {
-                        body.classList.remove('light-mode');
-                        body.classList.add('dark-mode');
-                    } else {
-                        body.classList.add('light-mode');
-                        body.classList.remove('dark-mode');
-                    }
-                    lightModeBtn.classList.remove('active');
-                    darkModeBtn.classList.remove('active');
-                    systemModeBtn.classList.add('active');
-                    localStorage.setItem('theme', 'system');
-                }
-            }
-            
-            // Set initial theme
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else {
-                setTheme('system');
-            }
-            
-            // Theme button event listeners
-            lightModeBtn.addEventListener('click', () => setTheme('light'));
-            darkModeBtn.addEventListener('click', () => setTheme('dark'));
-            systemModeBtn.addEventListener('click', () => setTheme('system'));
-            
-            // Listen for system theme changes
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-                if (localStorage.getItem('theme') === 'system') {
-                    setTheme('system');
-                }
-            });
-            
-            // Detect viewport changes and reload page
-            let lastWidth = window.innerWidth;
-            const mobileBreakpoint = 640;
-            
-            window.addEventListener('resize', function() {
-                const currentWidth = window.innerWidth;
+		document.addEventListener('DOMContentLoaded', function() {
+			// Set current year in footer
+			document.getElementById('currentYear').textContent = new Date().getFullYear();
+			
+			// Theme Toggle with System Default
+			const themeSelect = document.getElementById('themeSelect');
+			const htmlElement = document.documentElement;
+			const codeBlockContainer = document.getElementById('codeBlockContainer');
+			
+			// Function to set theme based on selection
+			function setTheme(theme) {
+				if (theme === 'dark') {
+					htmlElement.classList.add('dark');
+					codeBlockContainer.classList.remove('light-mode-code');
+					localStorage.setItem('theme', 'dark');
+				} else if (theme === 'light') {
+					htmlElement.classList.remove('dark');
+					codeBlockContainer.classList.add('light-mode-code');
+					localStorage.setItem('theme', 'light');
+				} else {
+					// System default
+					localStorage.removeItem('theme');
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						htmlElement.classList.add('dark');
+						codeBlockContainer.classList.remove('light-mode-code');
+					} else {
+						htmlElement.classList.remove('dark');
+						codeBlockContainer.classList.add('light-mode-code');
+					}
+				}
+			}
+			
+			// Check for saved theme preference or use system preference
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme) {
+				themeSelect.value = savedTheme;
+				setTheme(savedTheme);
+			} else {
+				themeSelect.value = 'system';
+				setTheme('system');
+			}
+			
+			// Listen for theme changes
+			themeSelect.addEventListener('change', function() {
+				setTheme(this.value);
+			});
+			
+			// Listen for system theme changes
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+				if (themeSelect.value === 'system') {
+					setTheme('system');
+				}
+			});
+			
+			// Tab Navigation
+			const tabBtns = document.querySelectorAll('.tab-btn');
+			const tabContents = document.querySelectorAll('.tab-content');
+			
+			tabBtns.forEach(btn => {
+				btn.addEventListener('click', function() {
+					const tabId = this.getAttribute('data-tab');
+					
+					tabBtns.forEach(btn => {
+						btn.classList.remove('border-b-2', 'border-primary-500', 'text-primary-600', 'dark:text-primary-400');
+						btn.classList.add('text-gray-500', 'dark:text-gray-400', 'hover:text-primary-600', 'dark:hover:text-primary-400');
+					});
+					
+					tabContents.forEach(content => {
+						content.classList.remove('active');
+					});
+					
+					this.classList.add('border-b-2', 'border-primary-500', 'text-primary-600', 'dark:text-primary-400');
+					this.classList.remove('text-gray-500', 'dark:text-gray-400', 'hover:text-primary-600', 'dark:hover:text-primary-400');
+					
+					document.getElementById(`${tabId}-tab`).classList.add('active');
+				});
+			});
+			
+			// Logo Width Slider
+			const logoWidth = document.getElementById('logoWidth');
+			const logoWidthValue = document.getElementById('logoWidthValue');
+			
+			logoWidth.addEventListener('input', function() {
+				const width = this.value;
+				logoWidthValue.textContent = width;
+			});
+			
+			// Image Width Slider
+			const imageWidth = document.getElementById('imageWidth');
+			const imageWidthValue = document.getElementById('imageWidthValue');
+			
+			imageWidth.addEventListener('input', function() {
+				imageWidthValue.textContent = this.value;
+			});
+			
+			// Title Text Preview
+			const titleText = document.getElementById('titleText');
+			const titlePreview = document.getElementById('titlePreview');
+			
+			titleText.addEventListener('input', function() {
+				titlePreview.textContent = this.value;
+			});
+			
+			// Logo URL and Default Logo Toggle
+			const logoUrl = document.getElementById('logoUrl');
+			const useDefaultLogo = document.getElementById('useDefaultLogo');
+			const defaultLogoUrl = 'https://i.ibb.co/TqnQFmM2/Silent-Rogue.png';
+			
+			useDefaultLogo.addEventListener('change', function() {
+				if (this.checked) {
+					logoUrl.value = defaultLogoUrl;
+					logoUrl.disabled = true;
+				} else {
+					logoUrl.disabled = false;
+					logoUrl.value = '';
+				}
+			});
+			
+			// Initialize logo URL
+			if (useDefaultLogo.checked) {
+				logoUrl.value = defaultLogoUrl;
+				logoUrl.disabled = true;
+			}
+			
+			// Center Content Toggles
+			const centerAllContent = document.getElementById('centerAllContent');
+			const centerOnlyHeader = document.getElementById('centerOnlyHeader');
+			
+			centerAllContent.addEventListener('change', function() {
+				if (this.checked) {
+					centerOnlyHeader.checked = false;
+				}
+			});
+			
+			centerOnlyHeader.addEventListener('change', function() {
+				if (this.checked) {
+					centerAllContent.checked = false;
+				}
+			});
+			
+			// Extra Title & Custom Sections Toggles
+			const showExtraTitle = document.getElementById('showExtraTitle');
+			const extraTitleSection = document.getElementById('extraTitleSection');
+			const showCustomSections = document.getElementById('showCustomSections');
+			const customSections = document.getElementById('customSections');
+			
+			showExtraTitle.addEventListener('change', function() {
+				if (this.checked) {
+					extraTitleSection.classList.remove('hidden');
+				} else {
+					extraTitleSection.classList.add('hidden');
+				}
+			});
+			
+			showCustomSections.addEventListener('change', function() {
+				if (this.checked) {
+					customSections.classList.remove('hidden');
+				} else {
+					customSections.classList.add('hidden');
+				}
+			});
+			
+			// Add Image Input
+			const addImage = document.getElementById('addImage');
+			const imageInputs = document.getElementById('imageInputs');
+			
+			addImage.addEventListener('click', function() {
+				const imageInput = document.createElement('div');
+				imageInput.className = 'image-input p-4 border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800';
+				imageInput.innerHTML = `
+					<div class="flex flex-col md:flex-row gap-4">
+						<div class="flex-1">
+							<label class="block text-sm font-medium mb-1">Image URL</label>
+							<input type="text" class="imageUrl w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800" 
+								placeholder="https://example.com/image.jpg">
+						</div>
+						<div class="flex items-end pb-1">
+							<button class="removeImage p-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+								<i class="fas fa-trash"></i>
+							</button>
+						</div>
+					</div>
+				`;
+				imageInputs.appendChild(imageInput);
+			});
+			
+			// Remove Image Input
+			imageInputs.addEventListener('click', function(e) {
+				if (e.target.closest('.removeImage')) {
+					const imageInputs = document.querySelectorAll('.image-input');
+					if (imageInputs.length > 1) {
+						e.target.closest('.image-input').remove();
+					} else {
+						alert('You need at least one image input.');
+					}
+				}
+			});
+			
+			// Add Custom Section
+			const addCustomSection = document.getElementById('addCustomSection');
+			const customSectionsContainer = document.getElementById('customSections');
+			let customSectionCount = 1;
+			
+			addCustomSection.addEventListener('click', function() {
+				customSectionCount++;
+				const sectionId = `customSection${customSectionCount}`;
+				const customSection = document.createElement('div');
+				customSection.className = 'mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600';
+				customSection.innerHTML = `
+					<div class="flex justify-between items-center mb-4">
+						<h2 class="text-xl font-semibold flex items-center">
+							<i class="fas fa-puzzle-piece text-primary-500 mr-2"></i>Custom Section ${customSectionCount}
+						</h2>
+						<button class="removeCustomSection p-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+							<i class="fas fa-trash"></i>
+						</button>
+					</div>
+					
+					<div class="mb-4">
+						<label class="block text-sm font-medium mb-2">Section Title</label>
+						<input type="text" class="customSectionTitle w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+							placeholder="Enter section title" value="Custom Section ${customSectionCount}">
+					</div>
+					
+					<div>
+						<label class="block text-sm font-medium mb-2">Section Content</label>
+						<textarea class="customSectionContent w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md" 
+							rows="4" placeholder="Enter your content here..."></textarea>
+					</div>
+				`;
+				// Insert before the add button container
+				customSectionsContainer.insertBefore(customSection, addCustomSection.parentElement);
+			});
+			
+			// Remove Custom Section
+			customSectionsContainer.addEventListener('click', function(e) {
+				if (e.target.closest('.removeCustomSection')) {
+					e.target.closest('.mb-8').remove();
+				}
+			});
+			
+			// Extract URLs from BBCode
+			function extractUrlsFromBBCode(text) {
+				const urls = [];
+				
+				// Match direct URLs
+				const directUrlRegex = /^https?:\/\/\S+$/gm;
+				
+				// Match BBCode format: [URL=...][IMG]...[/IMG][/URL]
+				const bbcodeUrlRegex = /\[URL=[^\]]+\]\[IMG\]([^\]]+)\[\/IMG\]\[\/URL\]/g;
+				
+				// Match HTML img format: <img src="...">
+				const htmlImgRegex = /<img\s+src="([^"]+)"[^>]*>/g;
+				
+				// Extract direct URLs
+				let match;
+				while ((match = directUrlRegex.exec(text)) !== null) {
+					urls.push(match[0]);
+				}
+				
+				// Extract URLs from BBCode
+				let bbMatch;
+				while ((bbMatch = bbcodeUrlRegex.exec(text)) !== null) {
+					urls.push(bbMatch[1]); // Using image URL (first group)
+				}
+				
+				// Extract URLs from HTML img tags
+				let htmlMatch;
+				while ((htmlMatch = htmlImgRegex.exec(text)) !== null) {
+					urls.push(htmlMatch[1]);
+				}
+				
+				return urls;
+			}
+			
+			// Bulk Import Modal
+			const bulkImport = document.getElementById('bulkImport');
+			const bulkImportModal = document.getElementById('bulkImportModal');
+			const closeModal = document.getElementById('closeModal');
+			const importImages = document.getElementById('importImages');
+			
+			bulkImport.addEventListener('click', function() {
+				bulkImportModal.classList.remove('hidden');
+			});
+			
+			closeModal.addEventListener('click', function() {
+				bulkImportModal.classList.add('hidden');
+			});
+			
+            importImages.addEventListener('click', function() {
+                const bulkText = document.getElementById('bulkImportText').value;
+                const urls = extractUrlsFromBBCode(bulkText);
                 
-                // Check if crossing the mobile breakpoint in either direction
-                if ((lastWidth < mobileBreakpoint && currentWidth >= mobileBreakpoint) || 
-                    (lastWidth >= mobileBreakpoint && currentWidth < mobileBreakpoint)) {
-                    // Reload the page
-                    location.reload();
+                if (urls.length === 0) {
+                    alert('No valid URLs found. Please check your input.');
+                    return;
                 }
                 
-                lastWidth = currentWidth;
-            });
-            
-            // Tab switching
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const tabId = tab.getAttribute('data-tab');
-                    
-                    // Remove active class from all tabs
-                    tabs.forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
-                    tab.classList.add('active');
-                    
-                    // Hide all tab contents
-                    tabContents.forEach(content => {
-                        content.classList.add('hidden');
-                    });
-                    
-                    // Show the selected tab content
-                    document.getElementById(`${tabId}Tab`).classList.remove('hidden');
-                });
-            });
-            
-            // Add image input
-            document.getElementById('addImage').addEventListener('click', function() {
-                const imageInputs = document.getElementById('imageInputs');
-                const newInput = document.createElement('div');
-                newInput.className = 'image-input';
-                newInput.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="flex-grow">
-                            <div class="input-group mb-0">
-                                <label>Image URL</label>
-                                <input type="text" class="image-url focus:ring-2 focus:ring-primary-500" placeholder="https://i.ibb.co/example/image.png">
+                // Clear existing image inputs except the first one
+                const existingInputs = document.querySelectorAll('.image-input');
+                for (let i = 1; i < existingInputs.length; i++) {
+                    existingInputs[i].remove();
+                }
+                
+                // Set the first URL to the existing input
+                document.querySelector('.imageUrl').value = urls[0];
+                
+                // Add new inputs for the rest of the URLs
+                for (let i = 1; i < urls.length; i++) {
+                    const imageInput = document.createElement('div');
+                    imageInput.className = 'image-input p-4 border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800';
+                    imageInput.innerHTML = `
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <label class="block text-sm font-medium mb-1">Image URL</label>
+                                <input type="text" class="imageUrl w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800" 
+                                    value="${urls[i]}">
                             </div>
-                        </div>
-                        <div>
-                            <button class="remove-image btn btn-danger p-2 h-10 w-10">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                imageInputs.appendChild(newInput);
-                
-                // Add event listener to the new remove button
-                newInput.querySelector('.remove-image').addEventListener('click', function() {
-                    imageInputs.removeChild(newInput);
-                });
-                
-                // Add event listener for input changes
-                newInput.querySelector('.image-url').addEventListener('input', function() {
-                    // Do nothing - we'll only update on generate button click
-                });
-            });
-            
-            // Center content and center header only options
-            const centerContentCheckbox = document.getElementById('centerContent');
-            const centerHeaderOnlyCheckbox = document.getElementById('centerHeaderOnly');
-            
-            // Make the checkboxes mutually exclusive
-            centerContentCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    centerHeaderOnlyCheckbox.checked = false;
-                }
-            });
-            
-            centerHeaderOnlyCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    centerContentCheckbox.checked = false;
-                }
-            });
-            
-            // Generate BBCode
-            document.getElementById('generateBBCode').addEventListener('click', function() {
-                generateBBCode();
-                updatePreview();
-                
-                // Switch to BBCode tab
-                document.querySelector('[data-tab="code"]').click();
-            });
-            
-            // Copy BBCode to clipboard
-            document.getElementById('copyBBCode').addEventListener('click', function() {
-                const bbcodeOutput = document.getElementById('bbcodeOutput');
-                bbcodeOutput.select();
-                document.execCommand('copy');
-                
-                // Change button text temporarily
-                const originalHTML = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
-                setTimeout(() => {
-                    this.innerHTML = originalHTML;
-                }, 2000);
-            });
-            
-            // Add event listeners for input changes - but don't update preview automatically
-            document.getElementById('logoUrl').addEventListener('input', function() {
-                // Do nothing - we'll only update on generate button click
-            });
-            document.getElementById('useDefaultLogo').addEventListener('change', function() {
-                const logoUrlInput = document.getElementById('logoUrl');
-                logoUrlInput.disabled = this.checked;
-            });
-            document.getElementById('galleryTitle').addEventListener('input', function() {
-                // Do nothing - we'll only update on generate button click
-            });
-            document.getElementById('eac3toContent').addEventListener('input', function() {
-                // Do nothing - we'll only update on generate button click
-            });
-            document.getElementById('bdInfoContent').addEventListener('input', function() {
-                // Do nothing - we'll only update on generate button click
-            });
-            document.getElementById('sourcesContent').addEventListener('input', function() {
-                // Do nothing - we'll only update on generate button click
-            });
-            document.getElementById('blutopiaFormat').addEventListener('change', function() {
-                // Do nothing - we'll only update on generate button click
-            });
-            
-            function generateBBCode() {
-                const logoUrl = document.getElementById('useDefaultLogo').checked ? 
-                    "https://i.ibb.co/TqnQFmM2/Silent-Rogue.png" : 
-                    document.getElementById('logoUrl').value;
-                const galleryTitle = document.getElementById('galleryTitle').value;
-                const eac3toContent = document.getElementById('eac3toContent').value;
-                const bdInfoContent = document.getElementById('bdInfoContent').value;
-                const sourcesContent = document.getElementById('sourcesContent').value;
-                const useBlutopiaFormat = document.getElementById('blutopiaFormat').checked;
-                const centerContent = document.getElementById('centerContent').checked;
-                const centerHeaderOnly = document.getElementById('centerHeaderOnly').checked;
-                
-                let bbcode = '';
-                
-                // Logo image - always centered if centerHeaderOnly is true
-                if (centerContent || centerHeaderOnly) {
-                    bbcode += `[center]\n`;
-                }
-                
-                bbcode += `[url=https://ibb.co/zHL30GVx][img width=400]${logoUrl}[/img][/url]\n\n`;
-                
-                // Title section - always centered if centerHeaderOnly is true
-                bbcode += `[size=20][b][color=#4285F4]—–==[/color][color=#EA4335]📸[/color][color=#FBBC05] ${galleryTitle.includes('Screenshots Gallery') ? 'Screenshots' : galleryTitle}[/color] [color=#34A853]${galleryTitle.includes('Screenshots Gallery') ? 'Gallery' : ''}[/color][color=#EA4335] ==—–[/color][/b][/size]\n\n`;
-                
-                // Close center if enabled for header
-                if (centerContent || centerHeaderOnly) {
-                    bbcode += `[/center]\n\n`;
-                }
-                
-                // Images section - always centered if centerHeaderOnly is true
-                const imageInputs = document.querySelectorAll('.image-url');
-                imageInputs.forEach(input => {
-                    if (input.value.trim() !== '') {
-                        if (centerContent || centerHeaderOnly) {
-                            bbcode += `[center]\n`;
-                        }
-                        bbcode += `[url=${input.value}][img width=450]${input.value}[/img][/url]\n`;
-                        if (centerContent || centerHeaderOnly) {
-                            bbcode += `[/center]\n`;
-                        }
-                        bbcode += `\n`;
-                    }
-                });
-                
-                // Separator - shorter now
-                if (centerContent) {
-                    bbcode += `[center]\n`;
-                }
-                bbcode += `[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n`;
-                if (centerContent) {
-                    bbcode += `[/center]\n`;
-                }
-                bbcode += `\n`;
-                
-                // Eac3to Log section
-                if (eac3toContent.trim() !== '') {
-                    if (centerContent) {
-                        bbcode += `[center]\n`;
-                    }
-                    bbcode += `[size=20][i][b][color=#4285F4]E[/color][color=#EA4335]ac[/color][color=#FBBC05]3[/color] [color=#34A853]to[/color][color=#4285F4]Log[/color][/b][/i][/size]\n`;
-                    if (centerContent) {
-                        bbcode += `[/center]\n`;
-                    }
-                    bbcode += `\n`;
-                    
-                    if (useBlutopiaFormat) {
-                        if (centerContent) {
-                            bbcode += `[center]\n`;
-                        }
-                        bbcode += `[spoiler="Eac3 to Log"]\n[code][b][i]${eac3toContent}[/i][/b][/code]\n[/spoiler]\n`;
-                        if (centerContent) {
-                            bbcode += `[/center]\n`;
-                        }
-                    } else {
-                        if (centerContent) {
-                            bbcode += `[center]\n`;
-                        }
-                        bbcode += `[code][b][i]${eac3toContent}[/i][/b][/code]\n`;
-                        if (centerContent) {
-                            bbcode += `[/center]\n`;
-                        }
-                    }
-                    bbcode += `\n`;
-                    
-                    // Add separator between sections - shorter now
-                    if (centerContent) {
-                        bbcode += `[center]\n`;
-                    }
-                    bbcode += `[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n`;
-                    if (centerContent) {
-                        bbcode += `[/center]\n`;
-                    }
-                    bbcode += `\n`;
-                }
-                
-                // BDInfo section
-                if (bdInfoContent.trim() !== '') {
-                    if (centerContent) {
-                        bbcode += `[center]\n`;
-                    }
-                    bbcode += `[size=20][i][b][color=#4285F4]B[/color][color=#EA4335]D[/color][color=#FBBC05]I[/color][color=#34A853]n[/color][color=#4285F4]fo[/color][/b][/i][/size]\n`;
-                    if (centerContent) {
-                        bbcode += `[/center]\n`;
-                    }
-                    bbcode += `\n`;
-                    
-                    if (useBlutopiaFormat) {
-                        if (centerContent) {
-                            bbcode += `[center]\n`;
-                        }
-                        bbcode += `[spoiler="BDInfo"]\n[code][b][i]${bdInfoContent}[/i][/b][/code]\n[/spoiler]\n`;
-                        if (centerContent) {
-                            bbcode += `[/center]\n`;
-                        }
-                    } else {
-                        if (centerContent) {
-                            bbcode += `[center]\n`;
-                        }
-                        bbcode += `[code][b][i]${bdInfoContent}[/i][/b][/code]\n`;
-                        if (centerContent) {
-                            bbcode += `[/center]\n`;
-                        }
-                    }
-                    bbcode += `\n`;
-                    
-                    // Add separator between sections - shorter now
-                    if (centerContent) {
-                        bbcode += `[center]\n`;
-                    }
-                    bbcode += `[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n`;
-                    if (centerContent) {
-                        bbcode += `[/center]\n`;
-                    }
-                    bbcode += `\n`;
-                }
-                
-                // Sources section
-                if (sourcesContent.trim() !== '') {
-                    if (centerContent) {
-                        bbcode += `[center]\n`;
-                    }
-                    bbcode += `[size=20][i][b][color=#4285F4]S[/color][color=#EA4335]o[/color][color=#FBBC05]u[/color][color=#34A853]r[/color][color=#4285F4]ces[/color][/b][/i][/size]\n`;
-                    if (centerContent) {
-                        bbcode += `[/center]\n`;
-                    }
-                    bbcode += `\n`;
-                    
-                    if (useBlutopiaFormat) {
-                        if (centerContent) {
-                            bbcode += `[center]\n`;
-                        }
-                        bbcode += `[spoiler="Sources"]\n[code][b][i]${sourcesContent}[/i][/b][/code]\n[/spoiler]\n`;
-                        if (centerContent) {
-                            bbcode += `[/center]\n`;
-                        }
-                    } else {
-                        if (centerContent) {
-                            bbcode += `[center]\n`;
-                        }
-                        bbcode += `[code][b][i]${sourcesContent}[/i][/b][/code]\n`;
-                        if (centerContent) {
-                            bbcode += `[/center]\n`;
-                        }
-                    }
-                    bbcode += `\n`;
-                }
-                
-                // Final separator - shorter now
-                if (centerContent) {
-                    bbcode += `[center]\n`;
-                }
-                bbcode += `[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]`;
-                if (centerContent) {
-                    bbcode += `\n[/center]`;
-                }
-                
-                // Set the output
-                document.getElementById('bbcodeOutput').value = bbcode;
-                
-                return bbcode;
-            }
-            
-            function updatePreview() {
-                const logoUrl = document.getElementById('useDefaultLogo').checked ? 
-                    "https://i.ibb.co/TqnQFmM2/Silent-Rogue.png" : 
-                    document.getElementById('logoUrl').value;
-                const galleryTitle = document.getElementById('galleryTitle').value;
-                const eac3toContent = document.getElementById('eac3toContent').value;
-                const bdInfoContent = document.getElementById('bdInfoContent').value;
-                const sourcesContent = document.getElementById('sourcesContent').value;
-                const useBlutopiaFormat = document.getElementById('blutopiaFormat').checked;
-                const centerContent = document.getElementById('centerContent').checked;
-                const centerHeaderOnly = document.getElementById('centerHeaderOnly').checked;
-                const imageInputs = document.querySelectorAll('.image-url');
-                
-                const previewContainer = document.getElementById('previewContainer');
-                let previewHTML = '';
-                
-                // Logo image - always centered if centerHeaderOnly is true
-                previewHTML += `
-                    <div class="${centerContent || centerHeaderOnly ? 'text-center' : ''} mb-6">
-                        <a href="https://ibb.co/zHL30GVx" target="_blank" class="inline-block">
-                            <img src="${logoUrl}" class="image-preview mx-auto rounded-lg" style="max-width: 100%; height: auto;">
-                        </a>
-                    </div>
-                `;
-                
-                // Title section - always centered if centerHeaderOnly is true
-                previewHTML += `<div class="${centerContent || centerHeaderOnly ? 'text-center' : ''} rainbow-title mb-6 font-bold">${galleryTitle}</div>`;
-                
-                // Images section - always centered if centerHeaderOnly is true
-                let hasImages = false;
-                imageInputs.forEach(input => {
-                    if (input.value.trim() !== '') {
-                        hasImages = true;
-                        previewHTML += `
-                            <div class="${centerContent || centerHeaderOnly ? 'text-center' : ''} mb-6">
-                                <a href="${input.value}" target="_blank" class="inline-block">
-                                    <img src="${input.value}" class="image-preview mx-auto rounded-lg" style="max-width: 100%; height: auto;">
-                                </a>
-                            </div>
-                        `;
-                    }
-                });
-                
-                if (!hasImages) {
-                    previewHTML += `
-                        <div class="${centerContent || centerHeaderOnly ? 'text-center' : ''} mb-6 p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
-                            <div class="text-gray-400 dark:text-gray-500">
-                                <i class="fas fa-images text-4xl mb-2"></i>
-                                <p>Add image URLs to see them here</p>
+                            <div class="flex items-end pb-1">
+                                <button class="removeImage p-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </div>
                         </div>
                     `;
+                    imageInputs.appendChild(imageInput);
                 }
                 
-                // Separator - shorter now
-                previewHTML += `<div class="${centerContent ? 'text-center' : ''} separator my-6 text-lg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>`;
-                
-                // Eac3to Log section
-                if (eac3toContent.trim() !== '') {
-                    previewHTML += `<div class="${centerContent ? 'text-center' : ''} mb-4 font-bold text-xl" style="background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4); -webkit-background-clip: text; background-clip: text; color: transparent;"><i>Eac3 to Log</i></div>`;
-                    
-                    if (useBlutopiaFormat) {
-                        previewHTML += `
-                            <div class="mb-6 ${centerContent ? 'mx-auto' : ''}">
-                                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-t-lg border border-gray-300 dark:border-gray-600 flex items-center">
-                                    <i class="fas fa-caret-right mr-2"></i>
-                                    <span class="font-medium">Eac3 to Log</span>
-                                </div>
-                                <div class="code-block rounded-t-none"><b><i>${eac3toContent}</i></b></div>
-                            </div>
-                        `;
+                bulkImportModal.classList.add('hidden');
+			});
+			
+			// Pro Version Modal
+			const proVersionBtn = document.getElementById('proVersionBtn');
+			const proVersionModal = document.getElementById('proVersionModal');
+			const closeProModal = document.getElementById('closeProModal');
+			
+			proVersionBtn.addEventListener('click', function() {
+				proVersionModal.classList.remove('hidden');
+			});
+			
+			closeProModal.addEventListener('click', function() {
+				proVersionModal.classList.add('hidden');
+			});
+			
+			// Close modals when clicking outside
+			window.addEventListener('click', function(e) {
+				if (e.target === bulkImportModal) {
+					bulkImportModal.classList.add('hidden');
+				}
+				if (e.target === proVersionModal) {
+					proVersionModal.classList.add('hidden');
+				}
+			});
+			
+			// Generate BBCode
+			const generateBtn = document.getElementById('generateBtn');
+			const bbcodeOutput = document.getElementById('bbcodeOutput');
+			
+			generateBtn.addEventListener('click', function() {
+				const logoUrl = document.getElementById('logoUrl').value;
+				const logoWidth = document.getElementById('logoWidth').value;
+				const titleText = document.getElementById('titleText').value;
+				const useSpoilerTags = document.getElementById('useSpoilerTags').checked;
+				const centerAllContent = document.getElementById('centerAllContent').checked;
+				const centerOnlyHeader = document.getElementById('centerOnlyHeader').checked;
+				const showExtraTitle = document.getElementById('showExtraTitle').checked;
+				const extraTitleText = document.getElementById('extraTitleText').value;
+				const extraDescription = document.getElementById('extraDescription').value;
+				const imageWidth = document.getElementById('imageWidth').value;
+				const eac3Content = document.getElementById('eac3Content').value;
+				const bdInfoContent = document.getElementById('bdInfoContent').value;
+				const sourcesContent = document.getElementById('sourcesContent').value;
+				const showSeparatorLines = document.getElementById('showSeparatorLines').checked;
+				const multiColorHeading = document.getElementById('multiColorHeading').checked;
+				
+				let bbcode = '';
+				
+				// Process title text to handle multi-word titles
+				let titleParts = titleText.split(' ');
+				let formattedTitle;
+				
+				if (titleParts.length > 1) {
+					// If there are multiple words, make first word yellow and rest red
+					formattedTitle = `[color=#FBBC05]${titleParts[0]}[/color] [color=#EA4335]${titleParts.slice(1).join(' ')}[/color]`;
+				} else {
+					// If single word, keep it yellow
+					formattedTitle = `[color=#FBBC05]${titleText}[/color]`;
+				}
+				
+				// Center all content if selected
+				if (centerAllContent) {
+					bbcode += '[center]\n';
+				}
+				
+				// Logo section
+				if (logoUrl) {
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[center]\n';
+					}
+					bbcode += `[img width=${logoWidth}]${logoUrl}[/img]\n\n`;
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[/center]\n';
+					}
+				}
+				
+				// Extra Title & Description section
+				if (showExtraTitle && (extraTitleText || extraDescription)) {
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[center]\n';
+					}
+					bbcode += `[size=18][b][color=#4285F4]${extraTitleText}[/color][/b][/size]\n`;
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[/center]\n';
+					}
+					
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[center]\n';
+					}
+					bbcode += `\n${extraDescription}\n\n`;
+					if (showSeparatorLines) {
+						bbcode += '[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n\n';
+					}
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[/center]\n';
+					}
+				}
+				
+				// Title section
+				if (centerOnlyHeader && !centerAllContent) {
+					bbcode += '[center]\n';
+				}
+				bbcode += `[size=20][b][color=#4285F4]—–==[/color][color=#EA4335]📸[/color] ${formattedTitle} [color=#34A853]==—–[/color][/b][/size]\n\n`;
+				if (centerOnlyHeader && !centerAllContent) {
+					bbcode += '[/center]\n';
+				}
+				
+				// Images section
+				const imageInputs = document.querySelectorAll('.image-input');
+				imageInputs.forEach(input => {
+					const imageUrl = input.querySelector('.imageUrl').value;
+					
+					if (imageUrl) {
+						if (centerOnlyHeader && !centerAllContent) {
+							bbcode += '[center]\n';
+						}
+						bbcode += `[url=${imageUrl}][img width=${imageWidth}]${imageUrl}[/img][/url]\n\n`;
+						if (centerOnlyHeader && !centerAllContent) {
+							bbcode += '[/center]\n';
+						}
+					}
+				});
+				
+				// Separator
+				if (showSeparatorLines) {
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[center]\n';
+					}
+					bbcode += '[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n\n';
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[/center]\n';
+					}
+				}
+				
+                // EAC3 to Log section
+                if (eac3Content) {
+                    // Section title - conditionally centered
+                    if (centerHeadingsSeparators) bbcode += '[center]\n';
+                    if (multiColorHeading) {
+                        bbcode += '[size=20][i][b][color=#FFA500]EAC3 To Log[/color][/b][/i][/size]\n';
                     } else {
-                        previewHTML += `<div class="${centerContent ? 'mx-auto' : ''} code-block"><b><i>${eac3toContent}</i></b></div>`;
+                        bbcode += '[size=20][i][b][color=#4285F4]E[/color][color=#EA4335]ac[/color][color=#FBBC05]3[/color][color=#34A853] To[/color][color=#4285F4] Log[/color][/b][/i][/size]\n';
                     }
+                    if (centerHeadingsSeparators) bbcode += '[/center]\n\n';
                     
-                    // Separator between sections - shorter now
-                    previewHTML += `<div class="${centerContent ? 'text-center' : ''} separator my-6 text-lg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>`;
+                    // Add spoiler tags if enabled
+                    if (useSpoilerTags) bbcode += '[spoiler]\n';
+                    
+                    // Code content - left aligned (not affected by centerHeadingsSeparators)
+                    bbcode += `[code][b][i]${eac3Content}[/i][/b][/code]\n\n`;
+                    
+                    if (useSpoilerTags) bbcode += '[/spoiler]\n\n';
+                    
+                    // Separator - conditionally centered
+                    if (showSeparatorLines) {
+                        if (centerHeadingsSeparators) bbcode += '[center]\n';
+                        bbcode += '[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n';
+                        if (centerHeadingsSeparators) bbcode += '[/center]\n';
+                        bbcode += '\n';
+                    }
                 }
-                
+
                 // BDInfo section
-                if (bdInfoContent.trim() !== '') {
-                    previewHTML += `<div class="${centerContent ? 'text-center' : ''} mb-4 font-bold text-xl" style="background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4); -webkit-background-clip: text; background-clip: text; color: transparent;"><i>BDInfo</i></div>`;
-                    
-                    if (useBlutopiaFormat) {
-                        previewHTML += `
-                            <div class="mb-6 ${centerContent ? 'mx-auto' : ''}">
-                                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-t-lg border border-gray-300 dark:border-gray-600 flex items-center">
-                                    <i class="fas fa-caret-right mr-2"></i>
-                                    <span class="font-medium">BDInfo</span>
-                                </div>
-                                <div class="code-block rounded-t-none"><b><i>${bdInfoContent}</i></b></div>
-                            </div>
-                        `;
+                if (bdInfoContent) {
+                    // Section title - conditionally centered
+                    if (centerHeadingsSeparators) bbcode += '[center]\n';
+                    if (multiColorHeading) {
+                        bbcode += '[size=20][i][b][color=#8ac926]BDInfo Log[/color][/b][/i][/size]\n';
                     } else {
-                        previewHTML += `<div class="${centerContent ? 'mx-auto' : ''} code-block"><b><i>${bdInfoContent}</i></b></div>`;
+                        bbcode += '[size=20][i][b][color=#4285F4]BD[/color][color=#EA4335]In[/color][color=#FBBC05]fo[/color][color=#34A853] Log[/color][/b][/i][/size]\n';
                     }
+                    if (centerHeadingsSeparators) bbcode += '[/center]\n\n';
                     
-                    // Separator between sections - shorter now
-                    previewHTML += `<div class="${centerContent ? 'text-center' : ''} separator my-6 text-lg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>`;
+                    // Add spoiler tags if enabled
+                    if (useSpoilerTags) bbcode += '[spoiler]\n';
+                    
+                    // Code content - left aligned
+                    bbcode += `[code][b][i]${bdInfoContent}[/i][/b][/code]\n\n`;
+                    
+                    if (useSpoilerTags) bbcode += '[/spoiler]\n\n';
+                    
+                    // Separator - conditionally centered
+                    if (showSeparatorLines) {
+                        if (centerHeadingsSeparators) bbcode += '[center]\n';
+                        bbcode += '[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n';
+                        if (centerHeadingsSeparators) bbcode += '[/center]\n';
+                        bbcode += '\n';
+                    }
                 }
-                
+
                 // Sources section
-                if (sourcesContent.trim() !== '') {
-                    previewHTML += `<div class="${centerContent ? 'text-center' : ''} mb-4 font-bold text-xl" style="background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4); -webkit-background-clip: text; background-clip: text; color: transparent;"><i>Sources</i></div>`;
-                    
-                    if (useBlutopiaFormat) {
-                        previewHTML += `
-                            <div class="mb-6 ${centerContent ? 'mx-auto' : ''}">
-                                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-t-lg border border-gray-300 dark:border-gray-600 flex items-center">
-                                    <i class="fas fa-caret-right mr-2"></i>
-                                    <span class="font-medium">Sources</span>
-                                </div>
-                                <div class="code-block rounded-t-none"><b><i>${sourcesContent}</i></b></div>
-                            </div>
-                        `;
+                if (sourcesContent) {
+                    // Section title - conditionally centered
+                    if (centerHeadingsSeparators) bbcode += '[center]\n';
+                    if (multiColorHeading) {
+                        bbcode += '[size=20][i][b][color=#00a4fe]Sources[/color][/b][/i][/size]\n';
                     } else {
-                        previewHTML += `<div class="${centerContent ? 'mx-auto' : ''} code-block"><b><i>${sourcesContent}</i></b></div>`;
+                        bbcode += '[size=20][i][b][color=#4285F4]So[/color][color=#EA4335]ur[/color][color=#FBBC05]ce[/color][color=#34A853]s[/color][/b][/i][/size]\n';
+                    }
+                    if (centerHeadingsSeparators) bbcode += '[/center]\n\n';
+                    
+                    // Add spoiler tags if enabled
+                    if (useSpoilerTags) bbcode += '[spoiler]\n';
+                    
+                    // Code content - left aligned
+                    bbcode += `[code][b][i]${sourcesContent}[/i][/b][/code]\n\n`;
+                    
+                    if (useSpoilerTags) bbcode += '[/spoiler]\n\n';
+                    
+                    // Separator - conditionally centered
+                    if (showSeparatorLines) {
+                        if (centerHeadingsSeparators) bbcode += '[center]\n';
+                        bbcode += '[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n';
+                        if (centerHeadingsSeparators) bbcode += '[/center]\n';
+                        bbcode += '\n';
                     }
                 }
-                
-                // Final separator - shorter now
-                previewHTML += `<div class="${centerContent ? 'text-center' : ''} separator my-6 text-lg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>`;
-                
-                previewContainer.innerHTML = previewHTML;
-            }
-            
-            // Initialize with one image input
-            document.getElementById('addImage').click();
-            
-            // Restart typing animation when switching themes
-            function restartTypingAnimation() {
-                const titleElement = document.querySelector('.typing-animation');
-                titleElement.style.animation = 'none';
-                // Force reflow
-                void titleElement.offsetWidth;
-                titleElement.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite';
-            }
-            
-            lightModeBtn.addEventListener('click', restartTypingAnimation);
-            darkModeBtn.addEventListener('click', restartTypingAnimation);
-            systemModeBtn.addEventListener('click', restartTypingAnimation);
-        });
+
+                // Custom sections
+                if (showCustomSections) {
+                    const customSectionElements = document.querySelectorAll('#customSections > div:not(:last-child)');
+                    customSectionElements.forEach(section => {
+                        const sectionTitle = section.querySelector('.customSectionTitle')?.value;
+                        const sectionContent = section.querySelector('.customSectionContent')?.value;
+                        
+                        if (sectionTitle && sectionContent) {
+                            // Section title - conditionally centered
+                            if (centerHeadingsSeparators) bbcode += '[center]\n';
+                            if (multiColorHeading) {
+                                bbcode += `[size=20][i][b][color=#EA4335]${sectionTitle}[/color][/b][/i][/size]\n`;
+                            } else {
+                                bbcode += `[size=20][i][b][color=#4285F4]${sectionTitle.substring(0, 2)}[/color][color=#EA4335]${sectionTitle.substring(2, 4)}[/color][color=#FBBC05]${sectionTitle.substring(4, 6) || ''}[/color][color=#34A853]${sectionTitle.substring(6) || ''}[/color][/b][/i][/size]\n`;
+                            }
+                            if (centerHeadingsSeparators) bbcode += '[/center]\n\n';
+                            
+                            // Add spoiler tags if enabled
+                            if (useSpoilerTags) bbcode += '[spoiler]\n';
+                            
+                            // Code content - left aligned
+                            bbcode += `[code][b][i]${sectionContent}[/i][/b][/code]\n\n`;
+                            
+                            if (useSpoilerTags) bbcode += '[/spoiler]\n\n';
+                            
+                            // Separator - conditionally centered
+                            if (showSeparatorLines) {
+                                if (centerHeadingsSeparators) bbcode += '[center]\n';
+                                bbcode += '[b]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/b]\n';
+                                if (centerHeadingsSeparators) bbcode += '[/center]\n';
+                                bbcode += '\n';
+                            }
+                        }
+                    });
+                }
+				
+				// Display the generated BBCode
+				bbcodeOutput.textContent = bbcode;
+				
+				// Switch to BBCode tab
+				document.querySelector('[data-tab="bbcode"]').click();
+			});
+			
+			// Copy to clipboard
+			const copyBtn = document.getElementById('copyBtn');
+			
+			copyBtn.addEventListener('click', function() {
+				const bbcode = bbcodeOutput.textContent;
+				
+				navigator.clipboard.writeText(bbcode).then(() => {
+					// Update button text to show success
+					copyBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+					setTimeout(() => {
+						copyBtn.innerHTML = '<i class="fas fa-copy mr-2"></i>Copy to Clipboard';
+					}, 2000);
+				}).catch(err => {
+					console.error('Could not copy text: ', err);
+					
+					// Fallback method
+					const textarea = document.createElement('textarea');
+					textarea.value = bbcode;
+					textarea.setAttribute('readonly', '');
+					textarea.style.position = 'absolute';
+					textarea.style.left = '-9999px';
+					document.body.appendChild(textarea);
+					
+					textarea.select();
+					document.execCommand('copy');
+					
+					document.body.removeChild(textarea);
+					
+					copyBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+					setTimeout(() => {
+						copyBtn.innerHTML = '<i class="fas fa-copy mr-2"></i>Copy to Clipboard';
+					}, 2000);
+				});
+			});
+			
+			// Initialize with one image input
+			if (document.querySelectorAll('.image-input').length === 0) {
+				addImage.click();
+			}
+		});
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93b846adf43cc19c',t:'MTc0NjUzMjM5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942d1bceb67f85c9',t:'MTc0Nzc1NzQ3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
