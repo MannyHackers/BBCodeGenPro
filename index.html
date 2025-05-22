@@ -292,6 +292,17 @@
 							</div>
 							<p class="option-description">Center section titles and divider lines</p>
 						</div>
+						
+						<div>
+							<div class="flex items-center justify-between">
+								<label class="text-sm font-medium">Show Screenshots Title</label>
+								<label class="toggle-switch">
+									<input type="checkbox" id="showScreenshotsTitle">
+									<span class="toggle-slider"></span>
+								</label>
+							</div>
+							<p class="option-description">Show/hide the "Screenshots Gallery" title</p>
+						</div>
                     </div>
                 </div>
                 
@@ -827,11 +838,17 @@ or BBCode format:
 				// Match direct URLs
 				const directUrlRegex = /^https?:\/\/\S+$/gm;
 				
-				// Match BBCode format: [URL=...][IMG]...[/IMG][/URL]
-				const bbcodeUrlRegex = /\[URL=[^\]]+\]\[IMG\]([^\]]+)\[\/IMG\]\[\/URL\]/g;
+				// Match BBCode format: [URL=...][IMG]...[/IMG][/URL] (case insensitive)
+				const bbcodeUrlRegex = /\[URL=[^\]]+\]\[IMG\]([^\]]+)\[\/IMG\]\[\/URL\]/gi;
 				
 				// Match HTML img format: <img src="...">
 				const htmlImgRegex = /<img\s+src="([^"]+)"[^>]*>/g;
+				
+				// Match HTML figure format: <figure><img src="...">
+				const htmlFigureRegex = /<figure><img\s+src="([^"]+)"[^>]*>/g;
+				
+				// Match Imgbox format: [URL=...][IMG]...[/IMG][/URL] (case insensitive)
+				const imgboxRegex = /\[URL=[^\]]+\]\[IMG\]([^\]]+)\[\/IMG\]\[\/URL\]/gi;
 				
 				// Extract direct URLs
 				let match;
@@ -851,7 +868,21 @@ or BBCode format:
 					urls.push(htmlMatch[1]);
 				}
 				
-				return urls;
+				// Extract URLs from HTML figure tags
+				let figureMatch;
+				while ((figureMatch = htmlFigureRegex.exec(text)) !== null) {
+					urls.push(figureMatch[1]);
+				}
+				
+				// Extract URLs from Imgbox format
+				let imgboxMatch;
+				while ((imgboxMatch = imgboxRegex.exec(text)) !== null) {
+					urls.push(imgboxMatch[1]);
+				}
+				
+				return urls.filter((url, index, self) => 
+					url && self.indexOf(url) === index
+				); // Remove duplicates
 			}
 			
 			// Bulk Import Modal
@@ -953,6 +984,7 @@ or BBCode format:
 				const sourcesContent = document.getElementById('sourcesContent').value;
 				const showSeparatorLines = document.getElementById('showSeparatorLines').checked;
 				const multiColorHeading = document.getElementById('multiColorHeading').checked;
+				const showScreenshotsTitle = document.getElementById('showScreenshotsTitle').checked;
 				
 				let bbcode = '';
 				
@@ -1006,13 +1038,15 @@ or BBCode format:
 					}
 				}
 				
-				// Title section
-				if (centerOnlyHeader && !centerAllContent) {
-					bbcode += '[center]\n';
-				}
-				bbcode += `[size=20][b][color=#4285F4]—–==[/color][color=#EA4335]📸[/color] ${formattedTitle} [color=#34A853]==—–[/color][/b][/size]\n\n`;
-				if (centerOnlyHeader && !centerAllContent) {
-					bbcode += '[/center]\n';
+				// Title section (only if enabled)
+				if (showScreenshotsTitle) {
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[center]\n';
+					}
+					bbcode += `[size=20][b][color=#4285F4]—–==[/color][color=#EA4335]📸[/color] ${formattedTitle} [color=#34A853]==—–[/color][/b][/size]\n\n`;
+					if (centerOnlyHeader && !centerAllContent) {
+						bbcode += '[/center]\n';
+					}
 				}
 				
 				// Images section
